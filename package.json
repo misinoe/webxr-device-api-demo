@@ -1,0 +1,17 @@
+{
+  "name": "webxr-device-api-demo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "cert": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout cert/key.pem -out cert/cert.pem",
+    "start": "npx http-server -S -C cert/cert.pem -K cert/key.pem"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/misinoe/webxr-device-api-demo.git"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
