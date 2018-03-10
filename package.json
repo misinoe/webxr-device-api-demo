@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "cert": "openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout cert/key.pem -out cert/cert.pem",
-    "ssl-serve": "npx http-server -S -C cert/cert.pem -K cert/key.pem -p 4433 -O",
-    "start": "npx http-server"
+    "ssl-serve": "npx http-server -S -C cert/cert.pem -K cert/key.pem -p 4433 -O -c0",
+    "start": "npx http-server -c0"
   },
   "private": true,
   "repository": {
