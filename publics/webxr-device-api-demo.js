@@ -5,6 +5,7 @@ navigator.xr.addEventListener('devicechange', async () => {
   });
 
   const canvas = document.createElement('canvas');
+  document.body.appendChild(canvas);
   const context = canvas.getContext('webgl');
 
   await new Promise(resolve => {
@@ -28,9 +29,26 @@ navigator.xr.addEventListener('devicechange', async () => {
   await context.setCompatibleXRDevice(device);
   session.baseLayer = new XRWebGLLayer(session, context);
 
+  const drawScene = (view, pose) => {
+    console.log('draw');
+  };
+
   const drawFrame = (timestamp, frame) => {
-    let pose = frame.getDevicePose(frameOfReference);
-    console.log(pose);
+    const pose = frame.getDevicePose(frameOfReference);
+
+    const {baseLayer} = session;
+    for (let view of frame.views) {
+      // 現時点でこのAPIはまだサポートされていないと思われる
+      // const {x, y, width, height} = baseLayer.getViewport(view);
+      const {
+        x = 0,
+        y = 0,
+        width = 256,
+        height = 256,
+      } = {};
+      context.viewport(x, y, width, height);
+      drawScene(view, pose);
+    }
 
     session.requestAnimationFrame(drawFrame);
   };
