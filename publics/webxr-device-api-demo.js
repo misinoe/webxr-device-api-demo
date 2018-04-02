@@ -38,14 +38,7 @@ navigator.xr.addEventListener('devicechange', async () => {
 
     const {baseLayer} = session;
     for (let view of frame.views) {
-      // 現時点でこのAPIはまだサポートされていないと思われる
-      // const {x, y, width, height} = baseLayer.getViewport(view);
-      const {
-        x = 0,
-        y = 0,
-        width = 256,
-        height = 256,
-      } = {};
+      const {x, y, width, height} = baseLayer.getViewport(view);
       context.viewport(x, y, width, height);
       drawScene(view, pose);
     }
